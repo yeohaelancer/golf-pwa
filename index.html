@@ -15,9 +15,9 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
   --green:#1a6b3c;--green-light:#e8f5ee;--green-mid:#b7dfca;
-  --gray-50:#fafafa;--gray-100:#f5f5f5;--gray-200:#e5e5e5;
-  --gray-300:#d4d4d4;--gray-400:#a3a3a3;--gray-500:#737373;--gray-700:#404040;--gray-900:#171717;
-  --blue:#1d4ed8;--red:#dc2626;
+  --gray-50:#fafafa;--gray-100:#f5f5f5;--gray-200:#e5e5e5;--gray-300:#d4d4d4;
+  --gray-400:#a3a3a3;--gray-500:#737373;--gray-700:#404040;--gray-900:#171717;
+  --red:#dc2626;
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
 }
 html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;background:var(--gray-100);-webkit-font-smoothing:antialiased}
@@ -30,22 +30,48 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .header-left{display:flex;align-items:center;gap:10px;min-width:0}
 .header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .header-title{font-size:18px;font-weight:700;color:#fff;line-height:1.2}
-.header-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hbtn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:7px 11px;color:#fff;font-size:13px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap}
 .hbtn:active{opacity:.75}
-.homebtn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:7px 10px;color:#fff;font-size:17px;font-family:inherit;cursor:pointer;line-height:1}
+.homebtn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:7px 10px;color:#fff;font-size:17px;cursor:pointer;line-height:1}
 .homebtn:active{opacity:.75}
-
 .scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--safe-bottom)+24px)}
 .btn-primary{width:100%;background:var(--green);color:#fff;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer}
 .btn-primary:active{opacity:.85}
 .btn-secondary{width:100%;background:#fff;color:var(--gray-700);border:1px solid var(--gray-200);border-radius:12px;padding:14px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer}
 .btn-secondary:active{opacity:.75}
 
+/* 로딩 */
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(255,255,255,.88);z-index:500;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.loading-overlay.show{display:flex}
+.spinner{width:38px;height:38px;border:3px solid var(--green-mid);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-txt{font-size:14px;color:var(--gray-500);font-weight:500}
+
+/* 설정 화면 */
+.config-body{padding:28px 20px}
+.config-logo{font-size:52px;text-align:center;margin-bottom:16px}
+.config-title{font-size:22px;font-weight:700;color:var(--gray-900);text-align:center;margin-bottom:8px}
+.config-desc{font-size:14px;color:var(--gray-500);text-align:center;line-height:1.7;margin-bottom:28px}
+.config-card{background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:18px;margin-bottom:14px}
+.config-step-badge{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--green);color:#fff;border-radius:50%;font-size:12px;font-weight:700;margin-bottom:8px}
+.config-step-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:6px}
+.config-step-desc{font-size:13px;color:var(--gray-500);line-height:1.7}
+.config-step-desc a{color:var(--green);font-weight:600;text-decoration:none}
+.config-step-desc code{background:var(--gray-100);border-radius:4px;padding:1px 5px;font-size:12px;color:var(--gray-700)}
+.config-label{font-size:13px;font-weight:600;color:var(--gray-700);margin:16px 0 6px}
+.config-input{width:100%;border:1.5px solid var(--gray-200);border-radius:10px;padding:12px 14px;font-size:15px;font-family:inherit;color:var(--gray-900);outline:none;transition:border-color .15s}
+.config-input:focus{border-color:var(--green)}
+.config-input::placeholder{color:var(--gray-400)}
+.config-error{font-size:13px;color:var(--red);background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 13px;margin:12px 0;display:none}
+.config-error.show{display:block}
+.config-note{font-size:12px;color:var(--gray-400);text-align:center;margin-top:14px;line-height:1.7}
+.config-reset{font-size:12px;color:var(--gray-400);text-align:center;margin-top:10px;cursor:pointer;text-decoration:underline}
+
 /* 홈 */
 .home-header{background:var(--green);padding:calc(var(--safe-top)+22px) 20px 20px;flex-shrink:0}
 .home-title{font-size:26px;font-weight:700;color:#fff}
-.home-sub{font-size:14px;color:rgba(255,255,255,.75);margin-top:2px}
+.home-sub{font-size:13px;color:rgba(255,255,255,.75);margin-top:3px}
 .home-body{padding:16px}
 .new-btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:12px;padding:17px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:20px;box-shadow:0 4px 14px rgba(26,107,60,.3)}
 .new-btn:active{opacity:.85}
@@ -65,7 +91,7 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .empty-txt{font-size:16px;font-weight:600;color:var(--gray-700);margin-bottom:4px}
 .empty-sub{font-size:14px;color:var(--gray-500)}
 
-/* 설정 */
+/* 설정(게임) */
 .setup-body{padding:20px}
 .ss{margin-bottom:22px}
 .ss-title{font-size:12px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
@@ -88,16 +114,14 @@ html,body{height:100%;overflow:hidden;font-family:'Noto Sans KR',sans-serif;back
 .preview-title{font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px}
 .prow{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #cceedd;font-size:14px}
 .prow:last-child{border-bottom:none}
-.prow-k{color:#2d7a52}
-.prow-v{font-weight:600;color:var(--green)}
+.prow-k{color:#2d7a52}.prow-v{font-weight:600;color:var(--green)}
 
 /* 인증 */
 .auth-body{padding:20px}
 .auth-info{background:var(--green-light);border:1px solid var(--green-mid);border-radius:14px;padding:14px 16px;margin-bottom:20px}
 .auth-info-title{font-size:12px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
 .auth-info-row{display:flex;justify-content:space-between;font-size:14px;padding:3px 0}
-.auth-info-k{color:#2d7a52}
-.auth-info-v{font-weight:600;color:var(--green)}
+.auth-info-k{color:#2d7a52}.auth-info-v{font-weight:600;color:var(--green)}
 .auth-guide{font-size:14px;color:var(--gray-700);line-height:1.7;background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:14px 16px;margin-bottom:20px}
 .auth-guide strong{color:var(--green)}
 .auth-players-title{font-size:12px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
@@ -197,11 +221,65 @@ tr:nth-child(even) .score-cell{background:var(--gray-50)}
 <body>
 <div id="app">
 
-<!-- 홈 -->
-<div id="screen-home" class="screen active">
+<!-- ══ JSONBin 설정 화면 ══ -->
+<div id="screen-config" class="screen active">
+  <div class="scroll-area">
+    <div class="config-body">
+      <div class="config-logo">⛳</div>
+      <div class="config-title">골프 스코어</div>
+      <div class="config-desc">
+        <strong>JSONBin.io</strong>를 무료 DB로 사용합니다.<br>
+        API Key를 한 번만 입력하면 어떤 브라우저·기기에서든 데이터가 공유됩니다.
+      </div>
+
+      <div class="config-card">
+        <div class="config-step-badge">1</div>
+        <div class="config-step-title">JSONBin.io 가입</div>
+        <div class="config-step-desc">
+          <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> 접속 →
+          <strong>Sign Up</strong> (구글 계정으로 가입 가능)
+        </div>
+      </div>
+
+      <div class="config-card">
+        <div class="config-step-badge">2</div>
+        <div class="config-step-title">API Key 복사</div>
+        <div class="config-step-desc">
+          로그인 후 오른쪽 위 프로필 → <strong>API Keys</strong> 클릭<br>
+          → <code>Secret Key</code> 옆 복사 버튼 클릭
+        </div>
+      </div>
+
+      <div class="config-card">
+        <div class="config-step-badge">3</div>
+        <div class="config-step-title">아래에 붙여넣기</div>
+        <div class="config-step-desc">
+          복사한 키를 입력하면 자동으로 저장소가 생성됩니다.<br>
+          같은 API Key를 쓰는 모든 기기에서 데이터가 공유됩니다.
+        </div>
+      </div>
+
+      <div class="config-label">Secret Key</div>
+      <input class="config-input" id="cfg-key"
+        placeholder="$2a$10$..." autocomplete="off"
+        onkeydown="if(event.key==='Enter')saveConfig()">
+
+      <div class="config-error" id="cfg-error"></div>
+      <br>
+      <button class="btn-primary" onclick="saveConfig()">저장 후 시작 →</button>
+      <div class="config-note">
+        JSONBin.io 무료 플랜: 저장 10,000회/월, Bin 1개당 512KB<br>
+        골프 스코어 기록 용도로 충분합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 홈 ══ -->
+<div id="screen-home" class="screen">
   <div class="home-header">
     <div class="home-title">⛳ 골프 스코어</div>
-    <div class="home-sub">라운드 기록 관리</div>
+    <div class="home-sub" id="home-sub">라운드 기록 관리</div>
   </div>
   <div class="scroll-area">
     <div class="home-body">
@@ -212,7 +290,7 @@ tr:nth-child(even) .score-cell{background:var(--gray-50)}
   </div>
 </div>
 
-<!-- 설정 -->
+<!-- ══ 게임 설정 ══ -->
 <div id="screen-setup" class="screen">
   <div class="header">
     <div class="header-left">
@@ -254,49 +332,39 @@ tr:nth-child(even) .score-cell{background:var(--gray-50)}
   </div>
 </div>
 
-<!-- 인증 -->
+<!-- ══ 인증 ══ -->
 <div id="screen-auth" class="screen">
   <div class="header">
     <div class="header-left">
       <button class="homebtn" onclick="showHome()">🏠</button>
-      <div>
-        <div class="header-title">본인 확인</div>
-        <div class="header-sub">이름을 입력해 스코어카드에 접근하세요</div>
-      </div>
+      <div><div class="header-title">본인 확인</div><div class="header-sub">이름을 입력해 접근하세요</div></div>
     </div>
   </div>
   <div class="scroll-area">
     <div class="auth-body">
       <div class="auth-info" id="auth-info"></div>
-      <div class="auth-guide">
-        등록된 플레이어 이름을 아래에 입력하세요.<br>
-        이름이 일치하면 <strong>확인 및 수정</strong>이 가능합니다.
-      </div>
+      <div class="auth-guide">등록된 플레이어 이름을 입력하세요.<br>일치하면 <strong>확인 및 수정</strong>이 가능합니다.</div>
       <div class="auth-players-title">등록된 참여자</div>
       <div class="auth-player-list" id="auth-player-list"></div>
       <div class="auth-input-label">이름 입력</div>
       <div class="auth-input-row">
         <input class="auth-input" id="auth-input" type="text" placeholder="이름을 입력하세요"
           maxlength="10" autocomplete="off"
-          oninput="clearAuthFeedback()"
-          onkeydown="if(event.key==='Enter')confirmAuth()">
+          oninput="clearAuthFeedback()" onkeydown="if(event.key==='Enter')confirmAuth()">
         <button class="auth-ok-btn" onclick="confirmAuth()">확인</button>
       </div>
-      <div class="auth-error" id="auth-error">❌ 일치하는 이름이 없습니다. 다시 확인해주세요.</div>
+      <div class="auth-error" id="auth-error">❌ 일치하는 이름이 없습니다.</div>
       <div class="auth-success" id="auth-success"></div>
     </div>
   </div>
 </div>
 
-<!-- 스코어카드 -->
+<!-- ══ 스코어카드 ══ -->
 <div id="screen-scorecard" class="screen">
   <div class="header">
     <div class="header-left">
       <button class="homebtn" onclick="showHome()">🏠</button>
-      <div>
-        <div class="header-title">스코어카드</div>
-        <div class="header-sub" id="sc-sub"></div>
-      </div>
+      <div><div class="header-title">스코어카드</div><div class="header-sub" id="sc-sub"></div></div>
     </div>
     <div class="header-right">
       <button class="hbtn" onclick="downloadExcel()">📥 엑셀</button>
@@ -305,22 +373,18 @@ tr:nth-child(even) .score-cell{background:var(--gray-50)}
   </div>
   <div class="total-bar" id="total-bar"></div>
   <div class="scroll-area">
-    <div class="sc-wrap">
-      <table class="sc-table" id="sc-table"></table>
-    </div>
+    <div class="sc-wrap"><table class="sc-table" id="sc-table"></table></div>
   </div>
 </div>
 
-<!-- 결과 -->
+<!-- ══ 결과 ══ -->
 <div id="screen-result" class="screen">
   <div class="header">
     <div class="header-left">
       <button class="homebtn" onclick="showHome()">🏠</button>
       <div><div class="header-title">라운드 결과</div></div>
     </div>
-    <div class="header-right">
-      <button class="hbtn" onclick="downloadExcel()">📥 엑셀</button>
-    </div>
+    <div class="header-right"><button class="hbtn" onclick="downloadExcel()">📥 엑셀</button></div>
   </div>
   <div class="scroll-area">
     <div class="result-body">
@@ -343,6 +407,12 @@ tr:nth-child(even) .score-cell{background:var(--gray-50)}
   </div>
 </div>
 
+</div><!-- #app -->
+
+<!-- 로딩 -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-txt" id="loading-txt">불러오는 중...</div>
 </div>
 
 <!-- 피커 -->
@@ -368,55 +438,143 @@ tr:nth-child(even) .score-cell{background:var(--gray-50)}
 </div>
 
 <script>
-const PC = ['#1a6b3c','#1d4ed8','#b45309','#7c3aed'];
-const PB = ['#e8f5ee','#dbeafe','#fef3c7','#ede9fe'];
-const RE = ['🥇','🥈','🥉','4️⃣'];
-const SR = [-3,-2,-1,0,1,2,3,4,5];
+// ══════════════════════════════════════════
+//  상수
+// ══════════════════════════════════════════
+const PC  = ['#1a6b3c','#1d4ed8','#b45309','#7c3aed'];
+const PB  = ['#e8f5ee','#dbeafe','#fef3c7','#ede9fe'];
+const RE  = ['🥇','🥈','🥉','4️⃣'];
+const SR  = [-3,-2,-1,0,1,2,3,4,5];
+const BIN_BASE = 'https://api.jsonbin.io/v3';
 
+// ══════════════════════════════════════════
+//  상태
+// ══════════════════════════════════════════
+let API_KEY = '';
+let BIN_ID  = '';   // 생성된 bin ID (localStorage에 저장)
 let S = { games:[], current:null, readOnly:false, currentUser:null };
 let PT = { pid:null, hole:null };
+let _saving = false; // 저장 중복 방지
 
-function ls()  { try{S.games=JSON.parse(localStorage.getItem('golf_games')||'[]')}catch{S.games=[]} }
-function ss()  { localStorage.setItem('golf_games', JSON.stringify(S.games)) }
-function gid() { return Date.now()+Math.floor(Math.random()*9999) }
-function lbl(n){ if(n===null||n===undefined)return''; return n===0?'0':n>0?`+${n}`:`${n}` }
-
-function ptotal(g,pid){ return g.scores.filter(s=>s.player_id===pid&&s.score!==null).reduce((a,s)=>a+s.score,0) }
-function psub(g,pid,half){
-  const hs=half==='front'?[1,2,3,4,5,6,7,8,9]:[10,11,12,13,14,15,16,17,18];
-  return g.scores.filter(s=>s.player_id===pid&&hs.includes(s.hole)&&s.score!==null).reduce((a,s)=>a+s.score,0)
+// ══════════════════════════════════════════
+//  로딩
+// ══════════════════════════════════════════
+function showLoading(txt='처리 중...') {
+  document.getElementById('loading-txt').textContent = txt;
+  document.getElementById('loading').classList.add('show');
+}
+function hideLoading() {
+  document.getElementById('loading').classList.remove('show');
 }
 
-// 이름 마스킹: 첫 글자 + ●●● (최대 3개)
-function mask(name){
-  if(!name)return'***';
-  const first=name[0];
-  const dots='●'.repeat(Math.min(name.length-1,3));
-  return first+dots;
-}
-
-function showScreen(id){
+// ══════════════════════════════════════════
+//  화면
+// ══════════════════════════════════════════
+function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
 }
 
-function showHome(){
-  S.current=null; S.readOnly=false; S.currentUser=null;
-  ls(); renderList(); showScreen('home');
+// ══════════════════════════════════════════
+//  JSONBin API
+// ══════════════════════════════════════════
+async function binRequest(method, path, body) {
+  const res = await fetch(BIN_BASE + path, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Master-Key': API_KEY,
+      'X-Bin-Versioning': 'false',   // 버전 관리 OFF → 항상 최신만 유지
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+  return res.json();
 }
 
-// ── 홈 ──
-function renderList(){
-  const el=document.getElementById('game-list');
-  if(!S.games.length){
+// Bin 생성 (최초 1회)
+async function createBin() {
+  const res = await binRequest('POST', '/b', { games: [] });
+  return res.metadata.id;
+}
+
+// 전체 데이터 읽기
+async function readAll() {
+  const res = await binRequest('GET', `/b/${BIN_ID}/latest`);
+  return res.record;  // { games: [...] }
+}
+
+// 전체 데이터 쓰기
+async function writeAll(data) {
+  await binRequest('PUT', `/b/${BIN_ID}`, data);
+}
+
+// ══════════════════════════════════════════
+//  설정 저장
+// ══════════════════════════════════════════
+async function saveConfig() {
+  const key = document.getElementById('cfg-key').value.trim();
+  const errEl = document.getElementById('cfg-error');
+  errEl.classList.remove('show');
+
+  if (!key) { errEl.textContent='API Key를 입력해주세요.'; errEl.classList.add('show'); return; }
+
+  showLoading('JSONBin 연결 중...');
+  API_KEY = key;
+
+  try {
+    // 기존 Bin ID가 있으면 재사용
+    let binId = localStorage.getItem('jb_bin_' + btoa(key).slice(0,16));
+
+    if (!binId) {
+      // 새 Bin 생성
+      binId = await createBin();
+      localStorage.setItem('jb_bin_' + btoa(key).slice(0,16), binId);
+    }
+
+    BIN_ID = binId;
+    localStorage.setItem('jb_key', key);
+    localStorage.setItem('jb_bin', binId);
+
+    // 연결 테스트
+    const data = await readAll();
+    S.games = (data.games || []).sort((a,b)=>b.created_at.localeCompare(a.created_at));
+    hideLoading();
+    showHomeScreen();
+  } catch(e) {
+    hideLoading();
+    errEl.textContent = '연결 실패: Key를 다시 확인해주세요. (' + e.message + ')';
+    errEl.classList.add('show');
+  }
+}
+
+// ══════════════════════════════════════════
+//  홈
+// ══════════════════════════════════════════
+async function showHomeScreen() {
+  S.current = null; S.readOnly = false; S.currentUser = null;
+  showLoading('데이터 불러오는 중...');
+  try {
+    const data = await readAll();
+    S.games = (data.games || []).sort((a,b)=>b.created_at.localeCompare(a.created_at));
+  } catch(e) { alert('데이터 로드 실패: ' + e.message); }
+  hideLoading();
+  renderList();
+  showScreen('home');
+}
+
+function showHome() { showHomeScreen(); }
+
+function renderList() {
+  const el = document.getElementById('game-list');
+  if (!S.games.length) {
     el.innerHTML='<div class="empty"><div class="empty-ico">🏌️</div><div class="empty-txt">저장된 라운드가 없습니다.</div><div class="empty-sub">새 라운드를 시작해보세요!</div></div>';
     return;
   }
-  el.innerHTML=S.games.map(g=>{
-    const d=new Date(g.created_at).toLocaleString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
-    // 홈에서 이름 마스킹
-    const sc=g.players.map(p=>`${mask(p.name)}: ${lbl(ptotal(g,p.id))||'0'}`).join(' · ');
-    return`<div class="game-card" onclick="openGame(${g.id})" oncontextmenu="delGame(event,${g.id})">
+  el.innerHTML = S.games.map(g=>{
+    const d = new Date(g.created_at).toLocaleString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+    const sc = g.players.map(p=>`${mask(p.name)}: ${lbl(ptotal(g,p.id))||'0'}`).join(' · ');
+    return`<div class="game-card" onclick="openGame('${g.id}')" oncontextmenu="delGame(event,'${g.id}')">
       <div class="gc-header"><span class="gc-date">${d}</span>
         <span class="badge ${g.is_completed?'badge-done':'badge-ing'}">${g.is_completed?'완료':'진행중'}</span></div>
       <div class="gc-info">${g.hole_count}홀 · ${g.player_count}명 라운드</div>
@@ -426,62 +584,63 @@ function renderList(){
   }).join('');
 }
 
-function openGame(id){
-  const g=S.games.find(x=>x.id===id); if(!g)return;
-  S.current=g; S.currentUser=null; showAuth();
+function openGame(id) {
+  const g = S.games.find(x=>x.id===id); if(!g)return;
+  S.current = g; S.currentUser = null; showAuth();
 }
-function delGame(e,id){
+
+function delGame(e, id) {
   e.preventDefault();
-  showModal('게임 삭제','이 게임 기록을 삭제하시겠습니까?',true,()=>{
-    S.games=S.games.filter(g=>g.id!==id); ss(); renderList();
+  showModal('게임 삭제','이 게임 기록을 삭제하시겠습니까?',true, async()=>{
+    showLoading('삭제 중...');
+    S.games = S.games.filter(g=>g.id!==id);
+    try { await writeAll({ games: S.games }); } catch(err){ alert('삭제 실패: '+err.message); }
+    hideLoading();
+    renderList();
   });
 }
 
-// ── 인증 ──
-function showAuth(){
-  const g=S.current;
-  const d=new Date(g.created_at).toLocaleString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+// ══════════════════════════════════════════
+//  인증
+// ══════════════════════════════════════════
+function showAuth() {
+  const g = S.current;
+  const d = new Date(g.created_at).toLocaleString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
   document.getElementById('auth-info').innerHTML=`
     <div class="auth-info-title">라운드 정보</div>
     <div class="auth-info-row"><span class="auth-info-k">날짜</span><span class="auth-info-v">${d}</span></div>
     <div class="auth-info-row"><span class="auth-info-k">구성</span><span class="auth-info-v">${g.hole_count}홀 · ${g.player_count}명</span></div>
     <div class="auth-info-row"><span class="auth-info-k">상태</span><span class="auth-info-v">${g.is_completed?'완료':'진행중'}</span></div>`;
-
-  // 이름 마스킹 표시
-  document.getElementById('auth-player-list').innerHTML=g.players.map((p,i)=>{
-    const filled=g.scores.filter(s=>s.player_id===p.id&&s.score!==null).length;
+  document.getElementById('auth-player-list').innerHTML = g.players.map((p,i)=>{
+    const filled = g.scores.filter(s=>s.player_id===p.id&&s.score!==null).length;
     return`<div class="auth-pcard">
       <div class="auth-pavatar" style="background:${PC[i]}">${i+1}</div>
-      <div>
-        <div class="auth-pmask">${mask(p.name)}</div>
-        <div class="auth-phint">${filled===0?'미입력':filled+'/'+g.hole_count+'홀 입력됨'}</div>
-      </div>
+      <div><div class="auth-pmask">${mask(p.name)}</div>
+        <div class="auth-phint">${filled===0?'미입력':filled+'/'+g.hole_count+'홀 입력됨'}</div></div>
     </div>`;
   }).join('');
-
   document.getElementById('auth-input').value='';
   clearAuthFeedback();
   showScreen('auth');
   setTimeout(()=>document.getElementById('auth-input').focus(),350);
 }
 
-function clearAuthFeedback(){
+function clearAuthFeedback() {
   document.getElementById('auth-error').classList.remove('show');
   document.getElementById('auth-success').classList.remove('show');
 }
 
-function confirmAuth(){
-  const g=S.current;
-  const input=document.getElementById('auth-input').value.trim();
-  if(!input)return;
-  const norm=s=>s.toLowerCase().replace(/\s/g,'');
-  const matched=g.players.find(p=>norm(p.name)===norm(input));
+function confirmAuth() {
+  const g = S.current;
+  const input = document.getElementById('auth-input').value.trim();
+  if(!input) return;
+  const norm = s=>s.toLowerCase().replace(/\s/g,'');
+  const matched = g.players.find(p=>norm(p.name)===norm(input));
   if(!matched){
     document.getElementById('auth-error').classList.add('show');
-    document.getElementById('auth-input').select();
-    return;
+    document.getElementById('auth-input').select(); return;
   }
-  const sEl=document.getElementById('auth-success');
+  const sEl = document.getElementById('auth-success');
   sEl.textContent=`✅ ${matched.name}님 확인! 스코어카드로 이동합니다.`;
   sEl.classList.add('show');
   setTimeout(()=>{
@@ -491,8 +650,11 @@ function confirmAuth(){
   },700);
 }
 
-// ── 설정 ──
+// ══════════════════════════════════════════
+//  게임 설정
+// ══════════════════════════════════════════
 let setup={holes:9,count:2,names:['','','','']};
+
 function showSetup(){
   setup={holes:9,count:2,names:['','','','']};
   selectHoles(9); selectCount(2); renderPInputs(); updatePreview(); showScreen('setup');
@@ -525,19 +687,28 @@ function updatePreview(){
   document.getElementById('prev-names').textContent=
     Array.from({length:setup.count},(_,i)=>setup.names[i].trim()||`Player ${i+1}`).join(', ');
 }
-function startGame(){
+
+async function startGame(){
   const names=Array.from({length:setup.count},(_,i)=>setup.names[i].trim()||`Player ${i+1}`);
-  const gid2=gid();
-  const players=names.map((name,i)=>({id:gid()+i,game_id:gid2,name,position:i}));
+  const gid='g_'+Date.now();
+  const players=names.map((name,i)=>({id:'p_'+Date.now()+'_'+i,game_id:gid,name,position:i}));
   const scores=[];
   players.forEach(p=>{for(let h=1;h<=setup.holes;h++)scores.push({player_id:p.id,hole:h,score:null})});
-  const g={id:gid2,created_at:new Date().toISOString(),player_count:names.length,hole_count:setup.holes,is_completed:0,players,scores};
-  S.games.unshift(g); ss();
+  const g={id:gid,created_at:new Date().toISOString(),player_count:names.length,hole_count:setup.holes,is_completed:0,players,scores};
+
+  showLoading('라운드 생성 중...');
+  S.games.unshift(g);
+  try { await writeAll({games:S.games}); }
+  catch(e){ hideLoading(); S.games.shift(); alert('저장 실패: '+e.message); return; }
+  hideLoading();
+
   S.current=g; S.currentUser='creator'; S.readOnly=false;
   renderSC(); showScreen('scorecard');
 }
 
-// ── 스코어카드 ──
+// ══════════════════════════════════════════
+//  스코어카드
+// ══════════════════════════════════════════
 function renderSC(){
   const g=S.current;
   document.getElementById('sc-sub').textContent=
@@ -560,9 +731,8 @@ function renderTable(){
   const cw=Math.max(54,Math.floor((window.innerWidth-34-28)/g.players.length));
   const ph=g.players.map((p,i)=>`<th class="ph-col" style="color:${PC[i]};background:${PB[i]};width:${cw}px">${p.name}</th>`).join('');
   let html='';
-  if(g.hole_count===9){
-    html+=buildGroup('9홀 라운드 (1–9홀)',1,9,ph,'front');
-  } else {
+  if(g.hole_count===9) html+=buildGroup('9홀 라운드 (1–9홀)',1,9,ph,'front');
+  else{
     html+=buildGroup('전반 (1–9홀)',1,9,ph,'front');
     html+=`<tr class="div-row"><td colspan="${1+g.players.length}"></td></tr>`;
     html+=buildGroup('후반 (10–18홀)',10,18,ph,'back');
@@ -582,7 +752,7 @@ function buildGroup(label,from,to,ph,half){
       const cs=val===null?'':val<0?'color:#1d4ed8':val>0?'color:#dc2626':'';
       const empty=val===null;
       if(S.readOnly)return`<td class="score-cell"><span style="font-size:15px;font-weight:600;${cs}">${empty?'':val}</span></td>`;
-      return`<td class="score-cell" onclick="openPicker(${p.id},${n},'${p.name}')">
+      return`<td class="score-cell" onclick="openPicker('${p.id}',${n},'${p.name}')">
         <button class="score-btn${empty?' empty':''}" style="${cs}">${empty?'탭':val>0?'+'+val:val}</button></td>`;
     }).join('');
     h+=`<tr><td class="hole-col">${n}</td>${cells}</tr>`;
@@ -606,22 +776,41 @@ function openPicker(pid,hole,pname){
   }).join('');
   document.getElementById('picker-overlay').classList.add('show');
 }
-function selectScore(n){
+
+async function selectScore(n){
   const {pid,hole}=PT;
   const g=S.current;
   const s=g.scores.find(s=>s.player_id===pid&&s.hole===hole);
   if(s)s.score=n;
+  // 게임 목록 내 업데이트
   const idx=S.games.findIndex(x=>x.id===g.id);
   if(idx!==-1)S.games[idx]=g;
-  ss(); closePicker(); renderTable(); renderTotalBar();
+  closePicker();
+  renderTable(); renderTotalBar();
+  // 서버 저장 (디바운스)
+  schedSave();
 }
+
 function closePicker(e){ document.getElementById('picker-overlay').classList.remove('show'); }
 
+// 디바운스 저장 (연속 탭 시 마지막 한 번만 저장)
+let _saveTimer=null;
+function schedSave(){
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(async()=>{
+    try{ await writeAll({games:S.games}); }
+    catch(e){ console.error('저장 오류',e); }
+  },1200);
+}
+
 function confirmFinish(){
-  showModal('라운드 완료','완료 후에도 기록은 보존됩니다.',false,()=>{
+  showModal('라운드 완료','완료 후에도 기록은 보존됩니다.',false,async()=>{
     const g=S.current; g.is_completed=1;
     const idx=S.games.findIndex(x=>x.id===g.id);
-    if(idx!==-1)S.games[idx]=g; ss(); showResult();
+    if(idx!==-1)S.games[idx]=g;
+    showLoading('저장 중...');
+    try{ await writeAll({games:S.games}); }catch(e){}
+    hideLoading(); showResult();
   });
 }
 
@@ -637,24 +826,22 @@ function downloadExcel(){
   } else { buildExcel(g); }
 }
 function buildExcel(g){
-  const X=window.XLSX;
-  const wb=X.utils.book_new();
+  const X=window.XLSX,wb=X.utils.book_new();
   const d=new Date(g.created_at).toLocaleString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
   const rows=[];
   rows.push([`골프 스코어카드 - ${g.hole_count}홀 라운드`]);
   rows.push([`날짜: ${d}`,'',`참가: ${g.players.map(p=>p.name).join(', ')}`]);
-  rows.push([]);
-  rows.push(['홀',...g.players.map(p=>p.name)]);
+  rows.push([],['홀',...g.players.map(p=>p.name)]);
   const addH=(from,to,label,half)=>{
     rows.push([label]);
     for(let h=from;h<=to;h++)rows.push([h,...g.players.map(p=>{const s=g.scores.find(s=>s.player_id===p.id&&s.hole===h);return(s&&s.score!==null)?s.score:''})]);
     rows.push(['소계',...g.players.map(p=>psub(g,p.id,half))]);
     rows.push([]);
   };
-  if(g.hole_count===9){addH(1,9,'▶ 9홀','front');}
+  if(g.hole_count===9)addH(1,9,'▶ 9홀','front');
   else{addH(1,9,'▶ 전반 (1–9홀)','front');addH(10,18,'▶ 후반 (10–18홀)','back');}
   rows.push(['총합',...g.players.map(p=>ptotal(g,p.id))]);
-  rows.push([]);rows.push(['최종 순위']);
+  rows.push([],['최종 순위']);
   [...g.players].sort((a,b)=>ptotal(g,a.id)-ptotal(g,b.id)).forEach((p,i)=>{
     const f=psub(g,p.id,'front'),bk=g.hole_count===18?psub(g,p.id,'back'):null;
     rows.push([`${i+1}위`,p.name,lbl(ptotal(g,p.id)),g.hole_count===18?`전반 ${lbl(f)} / 후반 ${lbl(bk)}`:`합계 ${lbl(f)}`]);
@@ -672,14 +859,12 @@ function showResult(){
   document.getElementById('result-sub').textContent=`${g.hole_count}홀 최종 결과`;
   const sorted=[...g.players].sort((a,b)=>ptotal(g,a.id)-ptotal(g,b.id));
   document.getElementById('rank-list').innerHTML=sorted.map((p,rank)=>{
-    const oi=g.players.findIndex(x=>x.id===p.id);
-    const t=ptotal(g,p.id),f=psub(g,p.id,'front'),bk=g.hole_count===18?psub(g,p.id,'back'):null;
+    const oi=g.players.findIndex(x=>x.id===p.id),t=ptotal(g,p.id),f=psub(g,p.id,'front'),bk=g.hole_count===18?psub(g,p.id,'back'):null;
     return`<div class="rank-card${rank===0?' winner':''}">
       <div class="rank-left"><div class="rank-emoji">${RE[rank]}</div>
         <div><div class="rank-name" style="color:${PC[oi]}">${p.name}</div>
         <div class="rank-detail">${g.hole_count===18?`전반 ${lbl(f)} · 후반 ${lbl(bk)}`:'9홀 합계'}</div></div></div>
-      <div class="rank-total" style="color:${PC[oi]}">${lbl(t)||'0'}</div>
-    </div>`;
+      <div class="rank-total" style="color:${PC[oi]}">${lbl(t)||'0'}</div></div>`;
   }).join('');
   let sh='';
   if(g.hole_count===18){
@@ -707,8 +892,38 @@ function showModal(title,msg,isDanger,cb){
 }
 function closeModal(){ document.getElementById('modal').classList.remove('show'); }
 
-// 초기화
-ls(); renderList();
+// ── 헬퍼 ──
+function lbl(n){if(n===null||n===undefined)return'';return n===0?'0':n>0?`+${n}`:`${n}`}
+function ptotal(g,pid){return g.scores.filter(s=>s.player_id===pid&&s.score!==null).reduce((a,s)=>a+s.score,0)}
+function psub(g,pid,half){const hs=half==='front'?[1,2,3,4,5,6,7,8,9]:[10,11,12,13,14,15,16,17,18];return g.scores.filter(s=>s.player_id===pid&&hs.includes(s.hole)&&s.score!==null).reduce((a,s)=>a+s.score,0)}
+function mask(name){if(!name)return'***';return name[0]+'●'.repeat(Math.min(name.length-1,3))}
+
+// ══════════════════════════════════════════
+//  앱 초기화
+// ══════════════════════════════════════════
+(async()=>{
+  const key = localStorage.getItem('jb_key');
+  const bin = localStorage.getItem('jb_bin');
+  if (key && bin) {
+    API_KEY = key; BIN_ID = bin;
+    showLoading('데이터 불러오는 중...');
+    try {
+      const data = await readAll();
+      S.games = (data.games||[]).sort((a,b)=>b.created_at.localeCompare(a.created_at));
+      hideLoading();
+      showScreen('home');
+      renderList();
+    } catch(e) {
+      hideLoading();
+      // 연결 실패 시 설정 초기화
+      localStorage.removeItem('jb_key'); localStorage.removeItem('jb_bin');
+      showScreen('config');
+    }
+  } else {
+    showScreen('config');
+  }
+})();
+
 if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script>
 </body>
